@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-const App = () => (
+const App = () =>
   <div>
     <div className="navbar navbar-dark bg-primary">
       <a className="navbar-brand" href="/">
@@ -14,7 +14,6 @@ const App = () => (
         </div>
       </div>
     </div>
-  </div>
-)
+  </div>;
 
 export default App;
