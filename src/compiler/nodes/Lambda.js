@@ -1,4 +1,5 @@
 import Node from './Node';
+import Epsilon from './Epsilon';
 
 export default class lambda extends Node {
   constructor(lambda, id, dot, expr) {
@@ -6,7 +7,7 @@ export default class lambda extends Node {
     this.lambda = lambda;
     this.id = id;
     this.dot = dot;
-    this.expr = expr;
+    this.expr = expr || new Epsilon();
   }
 
   toJSON() {
@@ -23,8 +24,10 @@ export default class lambda extends Node {
     switch (format) {
       case '[]':
         return `[Lambda [λ] ${id} [.] ${expr}]`;
-      default:
+      case '()':
         return `(λ${id}.${expr})`;
+      default:
+        return `λ${id}.${expr}`;
     }
   }
 

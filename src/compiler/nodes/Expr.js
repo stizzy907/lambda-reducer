@@ -1,10 +1,11 @@
 import Node from './Node';
+import Epsilon from './Epsilon';
 
 export default class Expr extends Node {
   constructor(first, second) {
     super();
-    this.first = first;
-    this.second = second;
+    this.first = first || new Epsilon();
+    this.second = second || new Epsilon();
   }
 
   toJSON() {

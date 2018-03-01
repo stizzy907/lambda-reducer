@@ -1,10 +1,11 @@
 import Node from './Node';
+import Epsilon from './Epsilon';
 
 export default class Group extends Node {
   constructor(lparen, expr, rparen) {
     super();
     this.lparen = lparen;
-    this.expr = expr;
+    this.expr = expr || new Epsilon();
     this.rparen = rparen;
   }
 
@@ -20,10 +21,8 @@ export default class Group extends Node {
     switch (format) {
       case '[]':
         return `[Group [(] ${expr} [)]]`;
-      case '()':
-        return `(${expr})`;
       default:
-        return expr ? `(${expr})` : '';
+        return `(${expr})`;
     }
   }
 
