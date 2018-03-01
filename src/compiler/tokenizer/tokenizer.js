@@ -1,13 +1,13 @@
 function* tokenize(input) {
   /*
-    1:lambda (\\)
+    1:lambda (\\|λ)
     2:dot    (\.)
     3:oparen (\()
     4:cparen (\))
     5:id     ([^\\\.\(\)\s]+)
   */
 
-  const regex = /(\\)|(\.)|(\()|(\))|([^\\\.\(\)\s]+)/g;
+  const regex = /(\\|λ)|(\.)|(\()|(\))|([^\\\.\(\)\s]+)/g;
   let match;
 
   // Will return null once no more matches are found
