@@ -10,7 +10,6 @@ const shrink = node => {
     if (node.second instanceof Node.Epsilon) {
       return node.first;
     }
-    console.log(node);
   }
   if (node instanceof Node.Lambda) {
     node.expr = shrink(node.expr);
