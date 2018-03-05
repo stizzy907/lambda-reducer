@@ -7,7 +7,7 @@ const optimize = compose(optimizer, parser, tokenizer);
 
 describe('optimizer', () => {
   it('should shrink', () => {
-    const source = '(λx.x) (λy.y) (λy.y)0';
+    const source = '(λz.λy.z y x)(λy.λx.y x a)';
     const actual = optimize(source);
     expect(actual).toBe(undefined);
   });
