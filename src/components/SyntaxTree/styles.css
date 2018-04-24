@@ -1,0 +1,22 @@
+.SyntaxTree {
+}
+
+.SyntaxTree text {
+  font-size: 15px;
+  font-family: monospace;
+  alignment-baseline: central;
+  text-anchor: middle;
+}
+
+.SyntaxTree text.branch {
+  fill: blue;
+}
+
+.SyntaxTree text.leaf {
+  fill: green;
+}
+
+.SyntaxTree line {
+  stroke: gray;
+  stroke-width: 1px;
+}

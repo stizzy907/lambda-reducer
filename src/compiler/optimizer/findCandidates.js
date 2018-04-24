@@ -17,5 +17,4 @@ const findCandidates = rootNode => {
   recurse(rootNode);
   return nodes;
 };
-
 export default findCandidates;
