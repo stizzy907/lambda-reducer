@@ -91,6 +91,7 @@ SyntaxTree.propTypes = {
   textHeight: PropTypes.number,
   textAspectRatio: PropTypes.number,
   lineHeight: PropTypes.number,
+  source: PropTypes.string.isRequired,
 };
 
 SyntaxTree.defaultProps = {
