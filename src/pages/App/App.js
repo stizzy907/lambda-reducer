@@ -3,17 +3,19 @@ import compile from '../../compiler';
 import { SyntaxTree } from '../../components/SyntaxTree';
 
 class App extends Component {
-  state = { brackets: '' };
+  state = { brackets: '', parens: '' };
 
   pushMe = () => {
     const lambda = this.text.value;
-    const brackets = compile(lambda).toString('[]');
-    console.log(brackets);
+    const answer = compile(lambda);
+    const brackets = answer.toString('[]');
+    const parens = answer.toString('()');
     this.setState({ brackets });
+    this.setState({ parens });
   };
 
   render() {
-    const { brackets } = this.state;
+    const { brackets, parens } = this.state;
 
     return (
       <div>
@@ -41,6 +43,8 @@ class App extends Component {
             </button>
           </form>
           {brackets && <SyntaxTree source={brackets} />}
+          <div>{parens}</div>
+          <div />
         </div>
       </div>
     );
