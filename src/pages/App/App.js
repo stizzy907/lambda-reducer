@@ -37,13 +37,21 @@ class App extends Component {
                 placeholder="Enter lambda expression"
                 ref={instance => (this.text = instance)}
               />
+              <small id="lambdaHelpBlock" class="form-text text-muted">
+              Use either \ or λ for lambda. Example expression: (λx. \y. x + y)(9)(5)
+              </small>
             </div>
             <button type="button" className="btn btn-primary" onClick={this.pushMe}>
-              Push Me
+              Solve
             </button>
           </form>
-          {brackets && <SyntaxTree source={brackets} />}
-          <div>{parens}</div>
+            {brackets && <div class="jumbotron jumbotron-fluid">
+              <h1 class="display-5">Syntax Tree:</h1>
+                <div class="lead"><SyntaxTree source={brackets} />
+                <h1 class="display-5">Answer:</h1>
+                <div>{parens}</div>
+              </div>
+          </div>}
           <div />
         </div>
       </div>
