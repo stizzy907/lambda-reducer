@@ -4,9 +4,15 @@ import resolveConflicts from './resolveConflicts';
 import reduceLambda from './reduceLambda';
 import findAndReplace from './findAndReplace';
 
-const optimizer = ({ steps: originalSteps, tree: originalTree }) => {
-  const steps = [...originalSteps];
+const createAddStep = steps => next => {
+  const prev = steps[steps.length - 1];
+  if (prev.tree.toString('[]') !== next.tree.toString('[]')) steps.push(next);
+};
+
+const optimizer = ({ tree: originalTree, steps: originalSteps }) => {
   let tree = originalTree;
+  const steps = [...originalSteps];
+  const addStep = createAddStep(steps);
 
   const MAX_ATTEMPTS = 10;
   // It is pretty easy to cause infinite loops, or trees to grow indefinitely
@@ -14,6 +20,7 @@ const optimizer = ({ steps: originalSteps, tree: originalTree }) => {
   let attempt = 0;
   while (++attempt <= MAX_ATTEMPTS) {
     const result = shrink(tree);
+    addStep({ description: 'Shrink', tree: result.clone() });
     const candidates = findCandidates(result);
     // Naive approach, only trying first candidate
     const candidate = candidates[0];
@@ -22,7 +29,7 @@ const optimizer = ({ steps: originalSteps, tree: originalTree }) => {
     resolveConflicts(candidate);
     const reduced = reduceLambda(candidate);
     tree = findAndReplace(tree, candidate, reduced);
-    steps.push({ description: 'Optimize', tree });
+    addStep({ description: 'Reduce', tree: tree.clone() });
   }
 
   return { steps, tree };

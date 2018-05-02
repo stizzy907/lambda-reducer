@@ -1,17 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import { Card, CardHeader, CardBody } from 'reactstrap';
 import compile from '../../compiler';
 import { SyntaxTree } from '../../components/SyntaxTree';
+import { StepList } from '../../components/StepList';
 
 class App extends Component {
-  state = { brackets: '', parens: '' };
+  state = { steps: [], step: undefined, answer: '' };
 
-  pushMe = () => {
+  solve = () => {
     const lambda = this.text.value;
-    const answer = compile(lambda);
-    const brackets = answer.toString('[]');
-    const parens = answer.toString('()');
-    this.setState({ brackets });
-    this.setState({ parens });
+    const { steps, tree } = compile(lambda);
+    const step = steps[steps.length - 1];
+    const answer = tree.toString('()');
+    this.setState({ steps, step, answer });
   };
 
   change = event => {
@@ -19,8 +20,12 @@ class App extends Component {
     if (event.target.value !== value) event.target.value = value;
   };
 
+  stepChange = step => {
+    this.setState({ step });
+  };
+
   render() {
-    const { brackets, parens } = this.state;
+    const { steps, step, answer } = this.state;
 
     return (
       <div>
@@ -31,10 +36,8 @@ class App extends Component {
         </div>
         <div className="container">
           <form>
-            <div className="form-group">
-              <label className="col-sm-6 col-form-label" htmlFor="lambdaInput">
-                Lambda Reducer:
-              </label>
+            <div className="form-group mt-3">
+              <label htmlFor="lambdaInput">Lambda Expression:</label>
               <input
                 type="text"
                 className="form-control form-control-lg"
@@ -43,23 +46,34 @@ class App extends Component {
                 ref={instance => (this.text = instance)}
                 onChange={this.change}
               />
-              <small id="lambdaHelpBlock" class="form-text text-muted">
+              <small id="lambdaHelpBlock" className="form-text text-muted">
                 Use either \ or λ for lambda. Example expression: (λx. \y. x + y)(9)(5)
               </small>
             </div>
-            <button type="button" className="btn btn-primary" onClick={this.pushMe}>
+            <button type="button" className="btn btn-primary" onClick={this.solve}>
               Solve
             </button>
           </form>
-          {brackets && (
-            <div class="jumbotron jumbotron-fluid">
-              <h1 class="display-5">Syntax Tree:</h1>
-              <div class="lead">
-                <SyntaxTree source={brackets} />
-                <h1 class="display-5">Answer:</h1>
-                <div>{parens}</div>
-              </div>
-            </div>
+          {answer && (
+            <Fragment>
+              <Card color="success" outline className="my-3">
+                <CardHeader className="bg-success">Answer</CardHeader>
+                <CardBody>
+                  <div>{answer}</div>
+                </CardBody>
+              </Card>
+              <Card color="info" outline className="my-3">
+                <CardHeader className="bg-info">Syntax Tree</CardHeader>
+                <CardBody>
+                  <div className="d-flex">
+                    <div>
+                      <StepList steps={steps} onChange={this.stepChange} />
+                    </div>
+                    <div className="flex-grow-1 mx-3">{step && <SyntaxTree source={step.tree.toString('[]')} />}</div>
+                  </div>
+                </CardBody>
+              </Card>
+            </Fragment>
           )}
           <div />
         </div>

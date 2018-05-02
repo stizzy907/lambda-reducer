@@ -31,7 +31,7 @@ export default tokens => {
       case '(':
         return new Node.Expr(Group(), Expr());
       default:
-        return CompileError('Unexpected token');
+        return undefined;
     }
   };
 
@@ -48,7 +48,7 @@ export default tokens => {
   current.type !== 'eof' && CompileError('Expected eof');
 
   return {
-    steps: [{ description: 'Parse', tree: result }],
+    steps: [{ description: 'Parse', tree: result.clone() }],
     tree: result,
   };
 };
