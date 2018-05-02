@@ -18,7 +18,7 @@ const optimizer = ({ tree: originalTree, steps: originalSteps }) => {
 
   const MAX_ATTEMPTS = 100;
   // It is pretty easy to cause infinite loops, or trees to grow indefinitely
-  // Abort after 10 attempts
+  // Abort after MAX_ATTEMPTS
   let attempt = 0;
   while (++attempt <= MAX_ATTEMPTS) {
     const result = shrink(tree);
