@@ -14,6 +14,10 @@ class App extends Component {
     this.setState({ parens });
   };
 
+  change = event => {
+    event.target.value = event.target.value.replace(/\\/g, 'λ');
+  };
+
   render() {
     const { brackets, parens } = this.state;
 
@@ -36,22 +40,26 @@ class App extends Component {
                 id="lambdaInput"
                 placeholder="Enter lambda expression"
                 ref={instance => (this.text = instance)}
+                onChange={this.change}
               />
               <small id="lambdaHelpBlock" class="form-text text-muted">
-              Use either \ or λ for lambda. Example expression: (λx. \y. x + y)(9)(5)
+                Use either \ or λ for lambda. Example expression: (λx. \y. x + y)(9)(5)
               </small>
             </div>
             <button type="button" className="btn btn-primary" onClick={this.pushMe}>
               Solve
             </button>
           </form>
-            {brackets && <div class="jumbotron jumbotron-fluid">
+          {brackets && (
+            <div class="jumbotron jumbotron-fluid">
               <h1 class="display-5">Syntax Tree:</h1>
-                <div class="lead"><SyntaxTree source={brackets} />
+              <div class="lead">
+                <SyntaxTree source={brackets} />
                 <h1 class="display-5">Answer:</h1>
                 <div>{parens}</div>
               </div>
-          </div>}
+            </div>
+          )}
           <div />
         </div>
       </div>
