@@ -7,7 +7,7 @@ describe('parser', () => {
       it(source, () => {
         const actual = parser(tokenizer(source));
         const expected = source;
-        expect(actual.toString()).toBe(expected);
+        expect(actual.tree.toString()).toBe(expected);
       });
     });
   });

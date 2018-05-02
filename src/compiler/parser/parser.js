@@ -45,5 +45,8 @@ export default tokens => {
 
   current.type !== 'eof' && CompileError('Expected eof');
 
-  return result;
+  return {
+    steps: [{ description: 'Parse', tree: result }],
+    tree: result,
+  };
 };

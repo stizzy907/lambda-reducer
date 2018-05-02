@@ -9,6 +9,6 @@ describe('optimizer', () => {
   it('should shrink', () => {
     const source = '(λz.λy.z y x)(λy.λx.y x a)';
     const actual = optimize(source);
-    expect(actual.toString('[]')).toBe('[Lambda [λ] [i0] [.] [Expr [i0] [Expr [x] [a]]]]');
+    expect(actual.tree.toString('[]')).toBe('[Lambda [λ] [i0] [.] [Expr [i0] [Expr [x] [a]]]]');
   });
 });

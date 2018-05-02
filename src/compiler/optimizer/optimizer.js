@@ -5,7 +5,8 @@ import resolveConflicts from './resolveConflicts';
 import reduceLambda from './reduceLambda';
 import findAndReplace from './findAndReplace';
 
-const optimizer = originalTree => {
+const optimizer = ({ steps: originalSteps, tree: originalTree }) => {
+  const steps = [...originalSteps];
   let tree = originalTree;
 
   const MAX_ATTEMPTS = 10;
@@ -22,9 +23,10 @@ const optimizer = originalTree => {
     resolveConflicts(candidate);
     const reduced = reduceLambda(candidate);
     tree = findAndReplace(tree, candidate, reduced);
+    steps.push({ description: 'Optimize', tree });
   }
 
-  return tree;
+  return { steps, tree };
 };
 
 export default optimizer;
