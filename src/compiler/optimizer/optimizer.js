@@ -16,7 +16,7 @@ const optimizer = ({ tree: originalTree, steps: originalSteps }) => {
 
   resolveConflicts.reset();
 
-  const MAX_ATTEMPTS = 10;
+  const MAX_ATTEMPTS = 100;
   // It is pretty easy to cause infinite loops, or trees to grow indefinitely
   // Abort after 10 attempts
   let attempt = 0;
