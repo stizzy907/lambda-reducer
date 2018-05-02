@@ -36,4 +36,8 @@ const resolveConflicts = expr => {
   });
 };
 
+resolveConflicts.reset = () => {
+  id = 0;
+};
+
 export default resolveConflicts;

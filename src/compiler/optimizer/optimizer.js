@@ -14,6 +14,8 @@ const optimizer = ({ tree: originalTree, steps: originalSteps }) => {
   const steps = [...originalSteps];
   const addStep = createAddStep(steps);
 
+  resolveConflicts.reset();
+
   const MAX_ATTEMPTS = 10;
   // It is pretty easy to cause infinite loops, or trees to grow indefinitely
   // Abort after 10 attempts
@@ -27,6 +29,7 @@ const optimizer = ({ tree: originalTree, steps: originalSteps }) => {
     // No candidates, we are done
     if (!candidate) break;
     resolveConflicts(candidate);
+    addStep({ description: 'Rename', tree: tree.clone() });
     const reduced = reduceLambda(candidate);
     tree = findAndReplace(tree, candidate, reduced);
     addStep({ description: 'Reduce', tree: tree.clone() });
