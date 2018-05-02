@@ -15,7 +15,8 @@ class App extends Component {
   };
 
   change = event => {
-    event.target.value = event.target.value.replace(/\\/g, 'λ');
+    const value = event.target.value.replace(/\\/g, 'λ');
+    if (event.target.value !== value) event.target.value = value;
   };
 
   render() {
