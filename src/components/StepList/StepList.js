@@ -26,7 +26,6 @@ class StepList extends Component {
   render() {
     const { steps } = this.props;
     const { activeIndex } = this.state;
-    console.log('activeIndex', activeIndex);
 
     return (
       <ListGroup>

@@ -27,7 +27,7 @@ function* tokenize(input) {
   };
 }
 
-// A generator returns an interator with just a next method. You must ask the next object if it is done.
+// A generator returns an iterator with just a next method. You must ask the next object if it is done.
 // Gets around having to ask if the result is done, instead of asking the iterator if it is done.
 export default input => {
   const tokens = tokenize(input);
