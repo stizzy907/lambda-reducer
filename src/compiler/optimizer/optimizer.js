@@ -1,4 +1,3 @@
-import * as Node from '../nodes';
 import shrink from './shrink';
 import findCandidates from './findCandidates';
 import resolveConflicts from './resolveConflicts';

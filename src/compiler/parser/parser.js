@@ -30,6 +30,8 @@ export default tokens => {
         return new Node.Expr(Lambda(), Expr());
       case '(':
         return new Node.Expr(Group(), Expr());
+      default:
+        return CompileError('Unexpected token');
     }
   };
 

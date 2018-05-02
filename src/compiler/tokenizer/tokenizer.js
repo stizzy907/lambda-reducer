@@ -7,7 +7,7 @@ function* tokenize(input) {
     5:id     ([^\\\.\(\)\s]+)
   */
 
-  const regex = /(\\|λ)|(\.)|(\()|(\))|([^\\\.\(\)\s]+)/g;
+  const regex = /(\\|λ)|(\.)|(\()|(\))|([^\\.()\s]+)/g;
   let match;
 
   // Will return null once no more matches are found

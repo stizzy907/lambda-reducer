@@ -10,7 +10,7 @@ const findAndReplace = (node, from, to) => {
       return new Node.Expr(to, node.second).clone();
     }
     if (node.second === from) {
-      return new Node.Expr(node.first, second).clone();
+      return new Node.Expr(node.first, to).clone();
     }
     const first = findAndReplace(node.first, from, to);
     const second = findAndReplace(node.second, from, to);
